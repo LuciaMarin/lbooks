@@ -1,0 +1,89 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#9998; Pedidos de la factura <span>{{id_factura}}</span></span></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="wrapper">
+                <nav class="navbar navbar-light bg-light">
+                    <div class="text-right">
+                        <a class="btn btn-outline-dark" href="./compra/new?factura={{ id_factura }}" ng-if="id_factura !== null">Nuevo pedido</a>
+                </div>
+                </nav>
+                <nav aria-label="Registros por página">
+                    <ul class="pagination float-right">
+                        <li class="page-item" ng-class="{'active':(rppActual==r)}" ng-repeat="r in rppS">
+                            <a class="page-link" href="./compra/plistXfactura/{{r}}/{{ calcPage[$index] }}/{{id_factura}}/{{filter}}">{{r}}</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="./compra/plistXfactura/{{ rppActual }}/{{ p }}/{{id_factura}}/{{filter}}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
+                    </ul>
+                </nav>
+                <table class="table">
+                    <tr>
+                        <th>Id <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="./compra/plistXfactura/{{ rppActual }}/{{ paginaActual }}/{{id_factura}}/{{filter}}/id/asc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-up"></i></i></a>
+                                <a href="./compra/plistXfactura/{{ rppActual }}/{{ paginaActual }}/{{id_factura}}/{{filter}}/id/desc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-down"></i></i></a>
+                            </div>
+                        </th>
+                        <th>Cantidad <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="./compra/plistXfactura/{{ rppActual }}/{{ paginaActual }}/{{id_factura}}/{{filter}}/cantidad/asc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-up"></i></i></a>
+                                <a href="./compra/plistXfactura/{{ rppActual }}/{{ paginaActual }}/{{id_factura}}/{{filter}}/cantidad/desc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-down"></i></i></a>
+                            </div>
+                        </th>
+                        <th>Producto <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="./compra/plistXfactura/{{ rppActual }}/{{ paginaActual }}/{{id_factura}}/{{filter}}/producto/asc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-up"></i></i></a>
+                                <a href="./compra/plistXfactura/{{ rppActual }}/{{ paginaActual }}/{{id_factura}}/{{filter}}/producto/desc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-down"></i></i></a>
+                            </div>
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                    <tr ng-repeat="fila in pagina">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.cantidad}}</td>
+                        <td><a href="./producto/view/{{fila.producto_obj.id}}">{{fila.producto_obj.descripcion}}</a></td>                       
+                        <td>
+                            <a href="./compra/view/{{fila.id}}"><i class="fa fa-eye"></i></a>
+                            <a href="./compra/edit/{{fila.id}}"><i class="fa fa-edit"></i></a>
+                            <a href="./compra/remove/{{fila.id}}"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-center" ng-show="pagina.length == 0">
+                        <span>No hay pedidos.</span>
+                </div>
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="./compra/plistXfactura/{{ rppActual }}/{{ p }}/{{id_factura}}/{{filter}}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

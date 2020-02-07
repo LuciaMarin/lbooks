@@ -1,0 +1,107 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+  <h1><span class="font-weight-bold context-menu">&#10133; Nueva factura <span ng-if="user_id">para el usuario {{user_id}}</span></span></h1>
+</div>
+<div class="container">
+  <div class="btn-seguircomprando"> <span  ng-click="volver()"><i class="fas fa-chevron-left"></i> Volver</span></div>
+  <div class="row">
+    <div class="col">
+      <form name="userForm" ng-show="!fallo&&!hecho">
+        <div class="form-group row">
+          <label for="iva" class="col-sm-2 col-form-label">IVA:</label>
+          <div class="col-sm-10">
+            <div class="form-group">
+              <input type="text" ng-model="iva" class="form-control" ng-model="iva" class="form-control"
+                ng-class="{ 'is-invalid' : !userForm.iva.$valid && !userForm.iva.$pristine}" name="iva"
+                ng-required="true"></input>
+            </div>
+            <div class=" invalid-feedback" ng-show="userForm.iva.$invalid">
+              El campo de IVA no puede estar vacio.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+
+
+           <usuario-selection 
+           class="modal fade " 
+           id="cadd-location-modal" 
+           obj="usuario_obj" 
+           on-usuario-set="usuarioRefresh(this,false)">
+          </usuario-selection>
+
+
+          <label for="usuario_obj" class="col-sm-2 col-form-label">Cliente:</label>
+          <div class="col-sm-10">
+            <div class="control">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" data-toggle="modal" data-target="#cadd-location-modal">
+                    <span class="fas fa-search"></span>
+                  </span>
+                </div>
+
+                <input type="number"
+                class="form-control" 
+                id="usuario_obj"
+                name="usuario_obj"
+                ng-model="usuario_obj.id" 
+                ng-change="usuarioRefresh(this,true)"
+                aria-describedby="basic-addon2" 
+                placeholder="Seleccione un usuario"
+                ng-class="{'is-invalid': !userForm.usuario_obj.$valid  && !userForm.usuario_obj.$pristine }"
+                min="1"
+                max="100"
+                ng-pattern="/^[1-9][0-9]?$|^100$/" 
+                ng-value="user_id"
+                ng-required="true" 
+                ng-model-options="{debounce: 1000}">
+
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <a href="#!" class="text-dark">
+                      <span class="p-2 bd-highlight"><i class="fas fa-users fa-1x"></i></span>
+                      Usuario: {{usuario_obj.nombre}} {{usuario_obj.apellido1}}
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div class="invalid-feedback" ng-show="userForm.usuario_obj.$error.pattern">
+                Id de usuario inválido.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="fecha" class="col-sm-2 col-form-label">Fecha:</label>
+          <div class="col-sm-10">
+            <md-datepicker ng-model="fecha" md-placeholder="Enter date" ng-value="fecha"
+              ng-class="{ 'is-invalid' : !userForm.fecha.$valid && !userForm.fecha.$pristine}" name="fecha"
+              ng-required="true"></md-datepicker>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col text-center">
+            <button type="button" class="btn btn-outline-dark" ng-disabled="!userForm.$valid" ng-click="new()">Crear factura</button>
+          </div>
+        </div>
+      </form>
+      <div ng-show="!fallo&&hecho">
+        <div class="alert alert-success text-center" role="alert">
+          <h2>Se ha añadido una nueva factura.</h2>
+          <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+          <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+        </div>
+      </div>
+      <div ng-show="fallo&&hecho">
+        <div class="alert alert-danger text-center" role="alert">
+          <h2>Ha ocurrido un error al añadir la factura.</h2>
+          <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+          <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+          <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

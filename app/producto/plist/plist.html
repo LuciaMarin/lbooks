@@ -1,0 +1,136 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#128441; Lista de productos</i></span></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: pink">
+                  <li class="breadcrumb-item"><a href="./">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Lista de productos</li>
+                </ol>
+              </nav>
+          </div>  
+        <div class="col">
+            <div class="wrapper">
+                <nav class="navbar navbar-light">
+                    <div class="text-right">
+                        <a class="btn btn-outline-dark" href="./producto/new" >Nuevo producto</a>
+                    </div>
+                </nav>
+                <nav aria-label="Registros por página">
+                    <ul class="pagination float-right">
+                        <li class="page-item" ng-class="{'active':(rppActual==r)}" ng-repeat="r in rppS">
+                            <a class="page-link" href="./producto/plist/{{r}}/{{ calcPage[$index] }}">{{r}}</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="./producto/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="ast">
+                    <span class="ast-importante">*Solo puedes eliminar los productos que no están en pedidos.</span>
+                </div>
+                <table class="table">
+                    <tr>
+                        <div>
+                            <th>Id <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/id/asc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true">
+                                        <i class="fas fa-sort-up"></i></i></a>
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/id/desc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true">
+                                        <i class="fas fa-sort-down"></i></i></a>
+                                </div>
+                            </th>
+                        </div>
+                        <div>
+                            <th>Código <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/codigo/asc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true">
+                                        <i class="fas fa-sort-up"></i></i></a>
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/codigo/desc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true">
+                                        <i class="fas fa-sort-down"></i></i></a>
+                                </div>
+                            </th>
+                        </div>
+                        <div>
+                            <th>Autor <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/autor/asc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true">
+                                        <i class="fas fa-sort-up"></i></i></a>
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/autor/desc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true">
+                                        <i class="fas fa-sort-down"></i></i></a>
+                                </div>
+                            </th>
+                        </div>
+                        <div>
+                            <th>Existencias <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/existencias/asc"
+                                        class="btn btn-outline-dark "role="button" aria-pressed="true"><i
+                                            class="fas fa-sort-up"></i></i></a>
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/existencias/desc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                            class="fas fa-sort-down"></i></i></a>
+                                </div>
+                            </th>
+                        </div>
+                        <div>
+                            <th>Precio <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/precio/asc"
+                                        class="btn btn-outline-dark role="button" aria-pressed="true"><i
+                                            class="fas fa-sort-up"></i></i></a>
+                                    <a href="./producto/plist/{{ rppActual }}/{{ paginaActual }}/precio/desc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                            class="fas fa-sort-down"></i></i></a>
+                                </div>
+                            </th>
+                        </div>
+                        <div>
+                            <th>Categoría</th>
+                        </div>
+                        <th>Acciones</th>
+                    </tr>
+                    <tr ng-repeat="fila in pagina">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.codigo}}</td>
+                        <td>{{fila.autor}}</td>
+                        <td>{{fila.existencias}}</td>
+                        <td>{{fila.precio}} €</td>     
+                        <td><a
+                                href="./tipoproducto/view/{{fila.tipo_producto_obj.id}}">{{fila.tipo_producto_obj.descripcion}}</a>
+                        </td>
+                        <td>
+                            <a href="./producto/view/{{fila.id}}"><i class="fa fa-eye"></i></a>
+                            <a href="./producto/edit/{{fila.id}}"><i class="fa fa-edit"></i></a>
+                            <a ng-if="fila.canDelete==true" href="./producto/remove/{{fila.id}}"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-center" ng-show="pagina.length == 0">
+                        <span>No hay productos.</span>
+                </div>
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="./producto/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

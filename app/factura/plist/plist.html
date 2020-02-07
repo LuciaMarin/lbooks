@@ -1,0 +1,110 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1 ng-if="client === 'Administrador'"><span class="font-weight-bold context-menu">&#128425; {{ user_id !== null ? "Lista de Facturas de " + usuario + "." : "Lista de Facturas" }}</span></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: pink">
+                  <li class="breadcrumb-item"><a href="./">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"> Lista de facturas</li>
+                </ol>
+              </nav>
+          </div> 
+        <div class="col">
+            <div class="wrapper">
+                <nav class="navbar navbar-light">
+                    <div class="text-right">
+                            <a class="btn btn-outline-dark" href="./factura/new" ng-if="user_id === null">Nueva factura</a>
+                            <a class="btn btn-outline-dark" href="./factura/new?user={{ user_id }}" ng-if="user_id !== null">Nueva factura</a>
+                    </div>
+                </nav>
+                <nav aria-label="Registros por página">
+                    <ul class="pagination float-right">
+                        <li class="page-item" ng-class="{'active':(rppActual==r)}" ng-repeat="r in rppS">
+                            <a class="page-link" href="./factura/plist/{{r}}/{{ calcPage[$index] }}">{{r}}</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="./factura/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="ast">
+                    <span class="ast-importante">*Solo puedes eliminar las facturas sin pedidos.</span>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Id <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="./factura/plist/{{ rppActual }}/{{ paginaActual }}/id/asc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-up"></i></i></a>
+                                <a href="./factura/plist/{{ rppActual }}/{{ paginaActual }}/id/desc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-down"></i></i></a>
+                            </div>
+                        </th>
+                        <th>Fecha <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="./factura/plist/{{ rppActual }}/{{ paginaActual }}/Fecha/asc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-up"></i></i></a>
+                                <a href="./factura/plist/{{ rppActual }}/{{ paginaActual }}/Fecha/desc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-down"></i></i></a>
+                            </div>
+                        </th>
+                        <th>
+                            Cliente
+                        </th>
+                        <th>IVA <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="./factura/plist/{{ rppActual }}/{{ paginaActual }}/IVA/asc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-up"></i></i></a>
+                                <a href="./factura/plist/{{ rppActual }}/{{ paginaActual }}/IVA/desc"
+                                    class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                        class="fas fa-sort-down"></i></i></a>
+                            </div>
+                        </th>
+                        <th>Nº Compras</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <tr ng-repeat="factura in facturas">
+                        <td>{{factura.id}}</td>
+                        <td>{{ factura.fecha | stringToDate | date : "dd/MM/yyyy"}}</td>
+                        <td><a class="text-dark" href="./usuario/view/{{factura.usuario_obj.id}}" >{{factura.usuario_obj.nombre}} {{factura.usuario_obj.apellido1}} {{factura.usuario_obj.apellido2}}</a></td> 
+                        <td>{{factura.iva}}</td>
+                        <td>
+                            <a  ng-if="factura.link_compra != 0" class="text-dark" href="./compra/plistXfactura/10/1/{{ factura.id }}/factura">{{ factura.link_compra }}</a>
+                            <span  ng-if="factura.link_compra == 0" >{{factura.link_compra}}</span>
+                        </td>
+                        <td>
+                            <a href="./factura/view/{{factura.id}}"><i class="fa fa-eye"></i></a>
+                            <a href="./factura/edit/{{factura.id}}"><i class="fa fa-edit"></i></a>
+                            <a ng-if="factura.canDelete==true" href="./factura/remove/{{factura.id}}"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-center" ng-show="facturas.length == 0">
+                        <span>No hay facturas.</span>
+                </div>
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="./factura/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

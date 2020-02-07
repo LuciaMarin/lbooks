@@ -1,0 +1,29 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1 class="text-center">&#128063; Ver categoría</h1>
+</div>
+<div class="container">
+    <div class="btn-seguircomprando"> <span  ng-click="volver()"><i class="fas fa-chevron-left"></i> Volver</span></div>
+    <div class="row">
+        <div class="col">
+            <form>
+                <div class="row form-group text-center mx-auto mt-5 table-responsive">
+                    <table class="table table-striped text-center">
+                        <tr>
+                            <th>ID</th>
+                            <td class="align-middle">{{data.id}}</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción</th>
+                            <td class="align-middle">{{data.descripcion}}</td>
+                        </tr>
+                        <tr>
+                            <th>Nº de Productos</th>
+                            <td class="align-middle">{{data.link_producto}}</td>
+                          </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

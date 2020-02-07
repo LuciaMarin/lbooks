@@ -1,0 +1,40 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#128063; Nueva categoría</span></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="mt-4 form-group" ng-class="{'is-invalid': userForm.descripcion.$invalid}">
+                    <label>Descripción:</label>
+                    <input type="text" name="descripcion" class="form-control" ng-model="descripcion" ng-maxlength="50"
+                        required>
+                    <p ng-show="userForm.descripcion.$invalid && !userForm.descripcion.$pristine"
+                        class="help-block red-text">
+                        Formato de descripción inválido.
+                    </p>
+                </div>
+                <div class="text-center mt-3" ng-show="botones">
+                    <button type="button" class="btn btn-outline-dark mt-2 mx-2" ng-disabled="!userForm.$valid" ng-click="new()">Crear categoría</button>
+                    <button type="button" class="btn btn-outline-dark mt-2 mx-2" ng-click="volver()">Volver atrás</button>
+                </div>
+            </form>
+            <div ng-show="!fallo&&hecho">
+                <div class="alert alert-success text-center" role="alert">
+                    <h2>Se ha añadido una nueva categoría.</h2>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha ocurrido un error al añadir la categoría.</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

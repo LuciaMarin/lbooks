@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="lbooksApp">
+
+<head>
+  <base href="/lbooks-client/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>L-Books</title>
+  <!--favicon-->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <!-- calendar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/es.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
+  <!-- fin de calendar -->
+  <link href="https://fonts.googleapis.com/css?family=Mukta&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="vendor/angular-css.min.js"></script>
+  <script src="vendor/foge-sha256.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/animated.css" />
+  <!--Descargar facturas-->
+  <script src="vendor/jspdf.debug.js"></script>
+  <!--App-->
+  <script src="config/module.js"></script>
+  <script src="config/config.js"></script>
+  <script src="config/filter.js"></script>
+  <script src="config/promesasService.js"></script>
+  <script src="config/routes.js"></script>
+  <script src="app/homeController.js"></script>
+  <script src="app/about.js"></script>
+  <!-- producto -->
+  <script src="app/producto/remove/remove.js"></script>
+  <script src="app/producto/edit/edit.js"></script>
+  <script src="app/producto/new/new.js"></script>
+  <script src="app/producto/fill/fill.js"></script>
+  <script src="app/producto/view/view.js"></script>
+  <script src="app/producto/plist/plist.js"></script>
+  <!-- tipoproducto -->
+  <script src="app/tipoproducto/remove/remove.js"></script>
+  <script src="app/tipoproducto/edit/edit.js"></script>
+  <script src="app/tipoproducto/view/view.js"></script>
+  <script src="app/tipoproducto/plist/plist.js"></script>
+  <script src="app/tipoproducto/new/new.js"></script>
+  <script src="app/tipoproducto/selection.js"></script>
+  <!-- compra -->
+  <script src="app/compra/plist/plist.js"></script>
+  <script src="app/compra/plistXfactura/plistXfactura.js"></script>
+  <script src="app/compra/misCompras/plist.js"></script>
+  <script src="app/compra/remove/remove.js"></script>
+  <script src="app/compra/view/view.js"></script>
+  <script src="app/compra/edit/edit.js"></script>
+  <script src="app/compra/new/new.js"></script>
+  <script src="app/compra/fill/fill.js"></script>
+  <!-- usuario -->
+  <script src="app/usuario/plist/plist.js"></script>
+  <script src="app/usuario/remove/remove.js"></script>
+  <script src="app/usuario/view/view.js"></script>
+  <script src="app/usuario/edit/edit.js"></script>
+  <script src="app/usuario/new/new.js"></script>
+  <script src="app/usuario/fill/fill.js"></script>
+  <script src="app/usuario/login/login.js"></script>
+  <script src="app/usuario/logout/logout.js"></script>
+  <script src="app/usuario/login-validate/login-validate.js"></script>
+  <script src="app/usuario/selection.js"></script>
+  <script src="app/usuario/signup/signup.js"></script>
+  <script src="app/usuario/recover/recover.js"></script>
+  <script src="app/usuario/recover/password/password.js"></script>
+  <!-- perfilusuario -->
+  <script src="app/perfil/view.js"></script>
+  <!-- tipo_usuario-->
+  <script src="app/tipousuario/plist/plist.js"></script>
+  <script src="app/tipousuario/remove/remove.js"></script>
+  <script src="app/tipousuario/view/view.js"></script>
+  <script src="app/tipousuario/edit/edit.js"></script>
+  <script src="app/tipousuario/selection.js"></script>
+  <!-- factura -->
+  <script src="app/factura/plist/plist.js"></script>
+  <script src="app/factura/misFacturas/plist.js"></script>
+  <script src="app/factura/remove/remove.js"></script>
+  <script src="app/factura/view/view.js"></script>
+  <script src="app/factura/edit/edit.js"></script>
+  <script src="app/factura/new/new.js"></script>
+  <script src="app/factura/fill/fill.js"></script>
+  <!-- carrito -->
+  <script src="app/carrito/plist/plist.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lobster+Two|Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+</head>
+
+<body>
+  <div ng-view></div>
+  <ng-include src="'app/footer.html'"></ng-include>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="shadow p-3 mb-5 bg-white modal-a">
+    <div class="row">
+      <div class="col-md-4">
+        <img width="100" height="90" ng-src="http://localhost:8081//imagenes/{{imagen_carrito}}">
+      </div>
+      <div class="col-md-8 text-capitalize">
+          <span class="font-weight-bold">{{descripcion_carrito}}</span>
+          <hr>
+          <span>{{autor_carrito}}</span>
+        <span>{{tipo_producto_carrito}}</span>
+        <hr>
+        <span class="font-weight-bold">Precio: {{precio_carrito}} €</span><span class="cart-product-format">/ud.</span>
+      </div>
+    </div>
+</div>
+<div class="header shadow">
+  <h1 class="animated rubberBand delay-2s"><span class="font-weight-bold context-menu animated infinite rubberBand delay-2s">L-<span class="color-b">Books</span></span></h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" ng-show="authStatus == 200">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb"style= "background-color: pink">
+          <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="txt-ti1">
+      <h1 class="text-center font-weight-bold animated lightSpeedIn delay-2s" style="color: palevioletred">Esto es lo que ofrecemos...</h1>
+    </div>
+    <nav aria-label="Paginación">
+      <ul class="pagination">
+        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+          ng-repeat="p in botonera track by $index">
+          <a class="page-link" ng-if="p != '...'" href="./?rpp={{ rppActual }}&page={{ p }}">{{p}}</a>
+          <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+        </li>
+      </ul>
+    </nav>
+    <div class="col-md-12">
+      <section ng-show="pagina.length > 0" class="container-posts">
+        <div class="card" ng-repeat="fila in pagina">
+          <div class="card-body">
+            <div class="card-body-product">
+              <div class="card_img">
+                <a class="card_img_link" href="./producto/view/{{fila.id}}">
+                  <img class="image" ng-src="http://localhost:8081//imagenes/{{fila.imagen}}">
+                </a>
+              </div>
+              <h2 class="card-title  text-capitalize">{{fila.descripcion}}</h5>
+                <p class="card-text">{{fila.codigo}}</p>
+                <p class="card-text">{{fila.autor}}</p>
+                <p class="card-text">{{fila.tipo_producto_obj.descripcion}}</p>
+                <p class="card-text">Precio: <span class="precio">{{fila.precio}} €</span><span class="cart-product-format">/ud.</span></p>
+            </div>
+            <div class="text-center">
+              <a id="addCarrito" name="addCarrito" ng-click="add(fila.id)" class="btn btn-outline-dark"
+                ng-show="authLevel.id != 1">Añadir al carrito <i class="fas fa-shopping-cart"></i></a>
+
+              <a href="./producto/edit/{{fila.id}}" class="btn btn-outline-dark"
+                ng-show="authLevel.id == 1">Editar producto</a>
+
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="text-center container-posts" ng-show="pagina.length == 0">
+        <span>No hay productos.</span>
+      </section>
+    </div>
+    <nav aria-label="Paginación">
+      <ul class="pagination">
+        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+          ng-repeat="p in botonera track by $index">
+          <a class="page-link" ng-if="p != '...'" href="./?rpp={{ rppActual }}&page={{ p }}">{{p}}</a>
+          <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

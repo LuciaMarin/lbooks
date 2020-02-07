@@ -1,0 +1,143 @@
+<nav class="navbar navbar-expand-lg navbar-light nav-center">
+  <a class="navbar-brand" href="./">L-<span class="font-weight-bold">Books</span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" ng-show="authStatus==200 || authStatus!=200"
+        ng-class="{'active':(controller=='homeController')}">
+        <a class="nav-link" href="./"><i class="fas fa-home"></i> Home</a>
+      </li>
+      <!--Mis facturas -->
+      <li class="nav-item" ng-show="authStatus==200 && authLevel.id != 1"
+        ng-class="{'active':(controller=='misFacturasController')}">
+        <a class="nav-link" href="./misFacturas/10/1"><i class="fas fa-file-invoice"></i> Mis facturas </a>
+      </li>
+      <!-- Productos -->
+      <div class="dropdown" ng-show="authStatus==200 && authLevel.id == 1">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"
+          ng-class="{'active':(controller=='productoPlistController' || controller=='productoViewController' || controller=='productoRemoveController' || controller=='productoNewController' || controller=='productoEditController')}">
+          &#128441; Productos
+        </button>
+        <div class="dropdown-menu" aria-labelledby="producto">
+          <a class="dropdown-item" ng-class="{'active':(controller=='productoPlistController')}"
+            href="./producto/plist/10/1">&#128063; Lista de
+            productos</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='productoNewController')}" href="./producto/new">&#10133; Nuevo
+            producto</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='tipoproductoPlistController')}"
+            href="./tipoproducto/plist/10/1">&#128063; Lista tipo
+            producto</a>
+        </div>
+      </div>
+      <!-- Pedidos -->
+      <div class="dropdown" ng-show="authStatus==200 && authLevel.id == 1">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          &#9998; Pedidos
+        </button>
+        <div class="dropdown-menu" ng-show="authStatus==200 && authLevel.id == 1" aria-labelledby="pedido"
+          ng-class="{'active':(controller=='compraPlistController' || controller=='compraNewController' || controller=='compraRemoveController' || controller=='compraViewController' || controller=='compraEditController')}">
+          <a class="dropdown-item" ng-class="{'active':(controller=='compraPlistController')}"
+            href="./compra/plist/10/1">
+            &#128063; Lista de Pedidos</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='compraNewController')}" href="./compra/new">
+            &#10133; Nuevo pedido</a>
+        </div>
+
+
+      </div>
+      <!-- Facturas -->
+      <div class="dropdown" ng-show="authStatus==200 && authLevel.id == 1">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          &#128425; Facturas
+        </button>
+        <div class="dropdown-menu" ng-show="authStatus==200 && authLevel.id == 1"
+          ng-class="{'active':(controller=='facturaPlistController' || controller=='facturaPlist2Controller' || controller=='facturaViewController' || controller=='facturaRemoveController' || controller=='facturaNewController' || controller=='facturaEditController')}"
+          aria-labelledby="facturas">
+          <a class="dropdown-item" ng-class="{'active':(controller=='facturaPlistController')}"
+            href="./factura/plist/10/1">
+            &#128063; Lista de Facturas</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='facturaNewController')}" href="./factura/new">
+            &#10133; Nueva Factura</a>
+        </div>
+      </div>
+
+      <!-- Usuarios -->
+      <div class="dropdown" ng-show="authStatus==200 && authLevel.id == 1">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          &#128491; Usuarios
+        </button>
+        <div class="dropdown-menu"
+          ng-class="{'active':(controller=='usuarioPlistController' || controller=='usuarioViewController' || controller=='usuarioRemoveController' || controller=='usuarioEditController')}"
+          aria-labelledby="usuarios">
+          <a class="dropdown-item" ng-class="{'active':(controller=='usuarioPlistController')}"
+            href="./usuario/plist/10/1">&#128063; Lista de
+            usuarios</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='usuarioNewController')}" href="./usuario/new">&#10133; Nuevo
+            usuario</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='tipousuarioPlistController')}"
+            href="./tipousuario/plist/10/1">&#128063; Lista tipo
+            usuario</a>
+        </div>
+      </div>
+      <!-- Fills -->
+      <div class="dropdown" ng-show="authStatus==200 && authLevel.id == 1">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          &#9000; Fills
+        </button>
+
+        <div class="dropdown-menu"
+          ng-class="{'active':(controller=='productoFillController' || controller=='facturaFillController' || controller=='usuarioFillController')}"
+          aria-labelledby="usuarios">
+          <a class="dropdown-item" ng-class="{'active':(controller=='usuarioFillController')}" href="./usuario/fill">
+            &#9000; Fill
+            de
+            usuarios</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='productoFillController')}" href="./producto/fill">
+            &#9000; Fill
+            de
+            productos</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='facturaFillController')}" href="./factura/fill">
+            &#9000; Fill
+            de
+            facturas</a>
+          <a class="dropdown-item" ng-class="{'active':(controller=='compraFillController')}" href="./compra/fill"> &#9000; Fill
+            de
+            pedidos</a>
+        </div>
+      </div>
+    </ul>
+    </ul>
+    <div class="conection">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" ng-show="authStatus!=200" ng-class="{'active': controller=='signup'}">
+          <a class="nav-link" href="./signup">Registrarse <i class="fas fa-user-plus"></i></a>
+        </li>
+        <li class="nav-item" ng-show="authStatus!=200" ng-class="{'active': controller=='login'}">
+          <a class="nav-link" href="./login">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a>
+        </li>
+        <li class="nav-item" ng-show="authStatus==200"
+          ng-class="{'active':(controller=='usuarioviewController||usuarioViewPerfilController')}">
+          <a href="./perfil"><span class="nav-link font-weight-bold">@{{authUsername}} <span
+                ng-show="authStatus==200 && authLevel.id == 1">({{authLevel.descripcion}})<span></span></a>
+        </li>
+
+        <li class="nav-item" ng-class="{'active': controller=='logout'}"></li>
+        <a class="nav-link" ng-show="authStatus==200" href="./logout"><span class="logout">Cerrar Sesión </span>&#9211;</a>
+        </li>
+        <li class="nav-item" ng-show="authLevel.id != 1" ng-class="{'active':(controller=='carritoPlistController')}">
+          <a class="nav-link" href="./carrito/plist">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge badge-pill badge-danger">{{count}}</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,60 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#128063; Editar categoría</span></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+                <div class="btn-seguircomprando"> <span  ng-click="volver()"><i class="fas fa-chevron-left"></i> Volver</span></div>
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="form-group row">
+                    <label for="id" class="col-sm-2 col-form-label">Id:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="id" value="{{id}}" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="descripcion" class="col-sm-2 col-form-label">Descripción:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="descripcion" class="form-control"
+                            ng-class="{ 'is-invalid' :!userForm.descripcion.$valid && !userForm.descripcion.$pristine}"
+                            name="descripcion" ng-required="true" value="{{descripcion}}" />
+                        <div class="invalid-feedback" ng-show="userForm.descripcion.$invalid">
+                            El apartado de código no puede estar vacio.
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-outline-dark" ng-click="editar()">Actualizar los
+                            datos</button>
+                    </div>
+                </div>
+            </form>
+            <div ng-show="!fallo&&hecho">
+                <div class="alert alert-success text-center" role="alert">
+                    <h2>La categoría se ha actualizado con éxito.</h2>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha ocurrido un error al actualizar la categoría.</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&!hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha ocurrido un error al recibir datos de la categoría desde el servidor</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

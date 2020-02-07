@@ -1,0 +1,88 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#128063; Lista de categorías</span></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: pink">
+                  <li class="breadcrumb-item"><a href="./">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Lista de categorías</li>
+                </ol>
+              </nav>
+          </div>  
+        <div class="col">
+            <div class="wrapper">
+                <nav aria-label="Registros por página">
+                    <ul class="pagination float-right">
+                        <li class="page-item" ng-class="{'active':(rppActual==r)}" ng-repeat="r in rppS">
+                            <a class="page-link" href="./tipoproducto/plist/{{r}}/{{ calcPage[$index] }}">{{r}}</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="./tipoproducto/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
+                    </ul>
+                </nav>
+                <table class="table">
+                    <tr>
+                        <div>
+                            <th>Id <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <a href="./tipoproducto/plist/{{ rppActual }}/{{ paginaActual }}/id/asc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                            class="fas fa-sort-up"></i></i></a>
+                                    <a href="./tipoproducto/plist/{{ rppActual }}/{{ paginaActual }}/id/desc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                            class="fas fa-sort-down"></i></i></a>
+                                </div>
+                            </th>
+                        </div>
+                        <div>
+                            <th>Descripción <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <a href="./tipoproducto/plist/{{ rppActual }}/{{ paginaActual }}/descripcion/asc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                            class="fas fa-sort-up"></i></i></a>
+                                    <a href="./tipoproducto/plist/{{ rppActual }}/{{ paginaActual }}/descripcion/desc"
+                                        class="btn btn-outline-dark" role="button" aria-pressed="true"><i
+                                            class="fas fa-sort-down"></i></i></a>
+                                </div>
+                            </th>
+                        </div>
+                        <div>
+                            <th>Nº de Productos</th>
+                        </div>
+                        <th>Acciones</th>
+                    </tr>
+                    <tr ng-repeat="fila in pagina">
+                        <td>{{fila.id}}</td>
+                        <td>{{fila.descripcion}}</td>
+                        <td>{{fila.link_producto}}</td>
+                        <td>
+                            <a href="./tipoproducto/view/{{fila.id}}"><i class="fa fa-eye"></i></a>
+                            <a href="./tipoproducto/edit/{{fila.id}}"><i class="fa fa-edit"></i></a>
+                            <a href="./tipoproducto/remove/{{fila.id}}"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+
+                </table>
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="./tipoproducto/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

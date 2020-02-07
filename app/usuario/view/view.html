@@ -1,0 +1,60 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#128491; </i> Datos del usuario @{{login}}</span></h1>
+</div>
+<div class="container">
+    <div class="btn-seguircomprando" > <span ng-click="volver()"><i class="fas fa-chevron-left"></i> Volver</span></div>
+    <div class="row">
+        <div class="col">
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="form-group row">
+                    <label for="id" class="col-sm-2 col-form-label" ng-class="{'hidden': session==false}">Id:</label>
+                    <div class="col-sm-10" ng-class="{'hidden': session==false}">
+                        <p>{{id}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dni" class="col-sm-2 col-form-label" ng-class="{'hidden': session==false}">DNI:</label>
+                    <div class="col-sm-10">
+                        <p class="font-weight-bold">{{dni}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nombre" class="col-sm-2 col-form-label"
+                        ng-class="{'hidden': session==false}">Nombre:</label>
+                    <div class="col-sm-10">
+                        <p>{{nombre}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="apellido1" class="col-sm-2 col-form-label"
+                        ng-class="{'hidden': session==false}">Apellido:</label>
+                    <div class="col-sm-10">
+                        <h6>{{apellido1}}</h6>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label"
+                        ng-class="{'hidden': session==false}">Email:</label>
+                    <div class="col-sm-10">
+                        <h6>{{email}}</h6>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="login" class="col-sm-2 col-form-label"
+                        ng-class="{'hidden': session==false}">Login:</label>
+                    <div class="col-sm-10">
+                        <h6>{{login}}</h6>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tipo_usuario_obj" class="col-sm-2 col-form-label"
+                        ng-class="{'hidden': session==false}">Tipo de usuario:</label>
+                    <div class="col-sm-10">
+                        <h6>{{tipo_usuario_obj}}</h6>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

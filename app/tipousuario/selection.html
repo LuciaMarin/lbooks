@@ -1,0 +1,48 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-tag"></i> Seleccionar un tipo de
+                usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row text-center mx-auto mt-5 table-responsive">
+                <table class="table table-striped table-sm">
+                    <tr>
+                        <th>
+                            <p>ID</p>
+                            <div class="btn-group mb-2">
+                            </div>
+                        </th>
+                        <th>
+                            <p>Descripción</p>
+                        </th>
+                        <th>
+                            <p>Selección</p>
+                        </th>
+                    </tr>
+                    <tr ng-repeat="fila in c.data">
+                        <td class="align-middle">{{fila.id}}</td>
+                        <td class="align-middle">{{fila.descripcion}}</td>
+                        <td>
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group mx-auto">
+                                    <a class="btn btn-default btn-xs" ng-click="c.save(fila.id, fila.descripcion)"
+                                        data-dismiss="modal">
+                                        <i class="fa fa-reply" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" ng-click="c.reiniciar()">Reiniciar</button>
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>

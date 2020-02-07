@@ -1,0 +1,165 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#128491; Editar datos de usuario</i></span></h1>
+</div>
+<div class="container">
+    <div class="btn-seguircomprando"> <span  ng-click="volver()"><i class="fas fa-chevron-left"></i> Volver </span></div>
+    <div class="row">
+        <div class="col">
+            <div class="wrapper">  
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="form-group row">
+                    <label for="dni" class="col-sm-2 col-form-label">DNI:</label>
+                    <div class="col-sm-10">
+                        <input type="text" 
+                        ng-model="dni"
+                        name="dni"
+                        pattern="^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$"
+                        class="form-control"
+                        ng-class="{ 'is-invalid' :!userForm.dni.$valid && !userForm.dni.$pristine}" 
+                        value="{{dni}}" />
+                        <div class="invalid-feedback" ng-show="userForm.dni.$error.pattern">
+                            El DNI no es válido. *La letra debe estar en mayúsculas.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <input type="text" 
+                            ng-model="nombre"
+                            name="nombre"
+                            pattern="[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                            class="form-control"
+                            ng-class="{ 'is-invalid' : !userForm.nombre.$valid && !userForm.nombre.$pristine}"
+                            value="{{nombre}}"></input>
+                        </div>
+                        <div class="invalid-feedback d-block" ng-if="!userForm.nombre.$valid">
+                            El nombre no es válido.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="apellido1" class="col-sm-2 col-form-label">Primer apellido:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="apellido1" class="form-control"
+                            ng-class="{ 'is-invalid' : !userForm.apellido1.$valid && !userForm.apellido1.$pristine}"
+                            name="apellido1"  value="{{apellido1}}" />
+                        <div class="invalid-feedback" ng-show="userForm.apellido1.$error.pattern">
+                            El campo del primer apellido no puede estar vacio.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="apellido2" class="col-sm-2 col-form-label">Segundo apellido:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="apellido2" class="form-control"
+                            ng-class="{ 'is-invalid' : !userForm.apellido2.$valid && !userForm.apellido2.$pristine}"
+                            name="apellido2" value="{{apellido2}}" />
+                        <div class="invalid-feedback" ng-show="userForm.apellido2.$error.pattern">
+                            El campo del segundo apellido no puede estar vacio.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" 
+                        ng-model="email" 
+                        class="form-control"
+                        ng-class="{ 'is-invalid' : !userForm.email.$valid && !userForm.email.$pristine}"
+                        name="email" 
+                        value="{{email}}" />
+                        <div class="invalid-feedback" ng-show="userForm.email.$error.pattern">
+                            El email no es válido.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="login" class="col-sm-2 col-form-label">Username:</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                         ng-model="login"
+                          class="form-control"
+                          pattern="^[A-Za-z0-9_]{1,30}$"
+                            ng-class="{ 'is-invalid' : !userForm.login.$valid && !userForm.login.$pristine}"
+                            name="login" value="{{login}}" />
+                        <div class="invalid-feedback" ng-show="userForm.login.$error.pattern">
+                            El username no es válido.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <tipousuario-selection class="modal fade" id="cadd-location-modal" obj="tipo_usuario_obj"
+                      on-tipousuario-set="tipoUsuarioRefresh(this,false)">
+                    </tipousuario-selection>
+                    <label for="tipo_usuario_obj" class="col-sm-2 col-form-label">Tipo de usuario:</label>
+                    <div class="col-sm-10">
+                      <div class="control">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" data-toggle="modal" data-target="#cadd-location-modal">
+                              <span class="fas fa-search"></span>
+                            </span>
+                          </div>
+                          <input ng-model="tipo_usuario_obj.id" ng-change="tipoUsuarioRefresh(this,true)"
+                            aria-describedby="basic-addon2" 
+                            class="form-control"
+                             id="tipo_usuario_obj" 
+                             name="tipo_usuario_obj"
+                            type="number"
+                            ng-class="{'is-invalid': !userForm.tipo_usuario_obj.$valid  && !userForm.tipo_usuario_obj.$pristine }"
+                            min="1" max="100" ng-pattern="/^[1-9][0-9]?$|^100$/" 
+                            ng-required="true"
+                            ng-model-options="{debounce: 1000}">
+                          <div class="input-group-append">
+                            <span class="input-group-text">
+                              <a>
+                                <span class="p-2 bd-highlight"><i class="fas fa-users fa-1x"></i></span>
+                                Tipo de usuario: {{tipo_usuario_obj.descripcion}}
+                              </a>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="invalid-feedback" ng-show="userForm.tipo_usuario_obj.$error.pattern">
+                          Id de usuario inválido.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <br>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-outline-dark center" ng-click="modificar()">Actualizar los
+                            datos</button>
+                    </div>
+                </div>
+            </form>
+            <div ng-show="!fallo&&hecho">
+                <div class="alert alert-success text-center" role="alert">
+                    <h2>El usuario se ha actualizado con éxito.</h2>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha ocurrido un error al actualizar el usuario.</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&!hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha ocurrido un error al recibir datos del usuario desde el servidor.</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

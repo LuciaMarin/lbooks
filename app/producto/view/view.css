@@ -1,0 +1,114 @@
+.form-container{
+    padding:10px;
+}
+.baseprice{
+    font-size: 40px;
+    color:pink;
+    margin: 0;
+}
+
+.euro{
+    font-size: 32px;
+    color:pink;
+    margin-left: 0;
+}
+
+.t-p{
+    padding:10px;
+    border-bottom: 0.5px solid rgb(199, 199, 199);
+}
+
+.t-p2{
+    padding:20px;
+    background-color: rgb(219, 241, 255);
+}
+
+
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.btn-group>.btn:first-child {
+    margin-left: 0;
+}
+.btn-group.mas-menos button {
+    background: #fff;
+    padding: 5.5px 5px;
+}
+.btn-group>.btn {
+    float: left;
+}
+.btn-group-vertical>.btn, .btn-group>.btn {
+    position: relative;
+}
+.btn-secondary2 {
+    color: #444;
+    background-color: #e2e2e2;
+    border-color: #d2d2d2;
+    padding-bottom: 0px!Important;
+}
+
+
+
+.btn-group.mas-menos .form-control {
+    border-radius: 0;
+    float: left;
+    font-weight: 700;
+    height: 32px;
+    line-height: 19px;
+    margin: 0 -1px;
+    padding: 6px;
+    position: relative;
+    text-align: center;
+    top: 0;
+    width: 43px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #f2f2f2;
+    border: 1px solid #dcdcdc;
+    border-radius: .2143rem;
+   /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
+}
+
+.cantidad .cantidad_container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.btn-group {
+    position: relative;
+    vertical-align: middle;
+}
+.btn-group.mas-menos {
+    margin: .2rem;
+}
+.cantidad .mas-menos {
+    position: relative;
+    top: -9px;
+    margin-right: 10px;
+}
+
+.invalid{
+    border-color: red;
+}
+
+.errorAdd{
+    margin:80px;
+    height: 50%;
+}
+
+h1 {
+    font-weight: 600 !important;
+    color: grey;
+}

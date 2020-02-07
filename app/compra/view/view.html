@@ -1,0 +1,40 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#9998; Pedido relizado</span></h1>
+</div>
+<div class="container">
+    <div class="btn-seguircomprando"> <span  ng-click="volver()"><i class="fas fa-chevron-left"></i> Volver </span></div>
+    <div class="row">
+        <div class="col">
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="form-group row">
+                    <label for="id" class="col-sm-2 col-form-label" ng-class="{'hidden': session==false}">Id:</label>
+                    <div class="col-sm-10" ng-class="{'hidden': session==false}">
+                        <p>{{id}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="cantidad" class="col-sm-2 col-form-label"
+                        >Cantidad:</label>
+                    <div class="col-sm-10">
+                        <p>{{cantidad}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="producto_obj" class="col-sm-2 col-form-label"
+                        >Producto:</label>
+                    <div class="col-sm-10">
+                        <h6>{{producto_obj.id}}</h6>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="factura_obj" class="col-sm-2 col-form-label"
+                        >Factura:</label>
+                    <div class="col-sm-10">
+                        <h6>{{factura_obj.id}}</h6>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

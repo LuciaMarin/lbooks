@@ -1,0 +1,108 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1>&#128441; Vista de producto</h1>
+</div>
+<div class="container">
+    <div class="row"> 
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: pink">
+                  <li class="breadcrumb-item"><a href="./">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{descripcion}}</li>
+                </ol>
+              </nav>
+          </div>   
+        <div class="col-lg-4 text-center">
+            <img class="img-thumbnail" width="200" height="200" ng-src="http://localhost:8081//imagenes/{{imagen}}">
+        </div>
+        <div class="col-lg-8">
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="form-container">
+                    <div class="col-sm-12 t-p">
+                        <h3><strong>{{descripcion}}</strong></h3>
+
+                        <span class="baseprice">{{precio}}</span>
+                        <span class="euro">€</span>
+                    </div>
+
+                    <div class="col-sm-12 t-p2">
+
+                        <div class="form-group row" ng-show="authStatus==200 && sessionLevel == 1">
+                            <label for="id" class="col-sm-3 col-form-label"><strong>Id:</strong></label>
+                            <div class="col-sm-9 col-form-label">
+                                <p>{{id}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="codigo" class="col-sm-3 col-form-label"><strong>Código:</strong></label>
+                            <div class="col-sm-9 col-form-label">
+                                <p class="font-weight-bold">{{codigo}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="autor" class="col-sm-3 col-form-label"><strong>Autor:</strong></label>
+                            <div class="col-sm-9 col-form-label">
+                                <p class="font-weight-bold">{{autor}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="existencias"
+                                class="col-sm-3 col-form-label"><strong>Existencias:</strong></label>
+                            <div class="col-sm-9 col-form-label">
+                                <p>{{existencias}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tipo_producto_obj" class="col-sm-3 col-form-label"><strong>Categoría:</strong></label>
+                            <div class="col-sm-9 col-form-label">
+                                <p>{{tipo_producto_obj.descripcion}}</p>
+                            </div>
+                        </div>
+                        <div ng-show="authLevel.id != 1 && existencias>0" class="form-group row">
+
+                            <label  for="cantidad" class="col-sm-3 col-form-label"><strong>Cantidad:</strong></label>
+                            <div class="col-sm-9 col-form-label">
+                                <div class="cantidad_container">
+                                    <div class="btn-group mas-menos">
+                                        <button class="btn btn-outline-dark quantify-modify quantify-sub"
+                                            ng-click="menos()"><i class="fas fa-minus"></i></button>
+
+
+                                        <input id="article-quantity" 
+                                            class="form-control input-units"
+                                            ng-change="cantidadRefresh()"
+                                            type="text"
+                                            name="cantidad" 
+                                            ng-value="{{cantidad}}"
+                                            ng-model="cantidad" 
+                                            min="1"
+                                            ng-class="{'invalid': !userForm.cantidad.$valid }"
+                                            ng-pattern="regex"
+                                            max="{{existencias}}"
+                                            autocomplete="off" required>
+
+
+                                        <button class="btn btn-outline-dark quantify-modify quantify-add"
+                                            ng-click="mas()"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div><hr>                  
+                        </div>
+                        <div ng-show="authLevel.id != 1" class="text-center">
+                            <button type="submit" ng-show="existencias>0" ng-disabled="!userForm.cantidad.$valid" class="btn btn-outline-dark" ng-click="add()">Añadir al carrito</button>
+                            <div ng-show="existencias==0" class="alert">Sin stock</div>
+                        </div>   
+                        <a href="./producto/edit/{{id}}" class="btn btn-carrito btn-outline-dark cursor"
+                        ng-show="authLevel.id == 1">Editar Producto</a>                  
+                    </div>
+                </div>
+            </form>  
+            <div class="errorAdd" ng-show="authLevel.id != 1 && falloMensaje!=null">
+                <div style="font-size: 20px;">{{falloMensaje}} 😥</div>
+                <div class="btn-seguircomprando" ng-click="volver()"> <span><i class="fas fa-chevron-left"></i> Volver
+                        para seguir comprando</span></div>
+            </div>  
+        </div>
+    </div>
+</div>
+</div>

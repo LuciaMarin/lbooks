@@ -1,0 +1,37 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#128425; Factura de {{usuario_obj_nombre}}</span></h1>
+</div>
+<div class="container">
+    <div class="btn-seguircomprando"> <span  ng-click="volver()"><i class="fas fa-chevron-left"></i> Volver </span></div>
+    <div class="row">
+        <div class="col">
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="form-group row">
+                    <label for="id" class="col-sm-2 col-form-label">Id:</label>
+                    <div class="col-sm-10">
+                        <p>{{id}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fecha" class="col-sm-2 col-form-label">Fecha:</label>
+                    <div class="col-sm-10">
+                        <p>{{fecha | stringToDate | date : "dd/MM/yyyy"}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="iva" class="col-sm-2 col-form-label">IVA:</label>
+                    <div class="col-sm-10">
+                        <p>{{iva}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="usuario_obj" class="col-sm-2 col-form-label">Usuario:</label>
+                    <div class="col-sm-10">
+                        <p>{{usuario_obj_nombre}}</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

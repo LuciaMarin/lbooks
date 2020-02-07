@@ -1,0 +1,71 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#128425; Eliminar factura</span></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="form-group row">
+                    <label for="id" class="col-sm-2 col-form-label">Id:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="id" value="{{id}}" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fecha" class="col-sm-2 col-form-label">Fecha:</label>
+                    <div class="col-sm-10">
+                        <h6>{{fecha | stringToDate | date : "dd/MM/yyyy"}}</h6>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="iva" class="col-sm-2 col-form-label">IVA:</label>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <input class="form-control rounded-0" id="exampleFormControlTextarea2" ng-model="iva"
+                                class="form-control" name="iva" value="{{iva}}" readonly>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="usuario_obj_nombre" class="col-sm-2 col-form-label">Usuario id:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="usuario_obj_nombre" class="form-control" name="usuario_obj_nombre"
+                            value="{{usuario_obj_nombre}}" readonly />
+                    </div>
+                </div>
+                <br>
+                <p>¿Seguro que quiere eliminar la factura?</p>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-outline-dark" ng-click="remove()">Eliminar datos</button>
+                    </div>
+                </div>
+            </form>
+            <div ng-show="!fallo&&hecho">
+                <div class="alert alert-success text-center" role="alert">
+                    <h2>La factura se ha eliminado con éxito.</h2>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha ocurrido un error al eliminar la factura.</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&!hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha ocurrido un error al recibir datos de la factura desde el servidor.</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

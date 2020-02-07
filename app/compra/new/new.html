@@ -1,0 +1,145 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+  <h1 ng-if="id_factura == null"><span class="font-weight-bold context-menu">&#10133; Nuevo pedido</span></h1>
+  <h1 ng-if="id_factura != null"><span class="font-weight-bold context-menu">&#10133; Nuevo pedido para las factura {{id_factura}}</span></h1>
+</div>
+<div class="container">
+  <div class="btn-seguircomprando"> <span  ng-click="volver()"><i class="fas fa-chevron-left"></i> Volver</span></div>
+  <div class="row">
+    <div class="col">
+      <form name="userForm" ng-show="!fallo&&!hecho">
+        <div class="form-group row">
+          <label for="cantidad" class="col-sm-2 col-form-label">Cantidad:</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="cantidad" class="form-control"
+              ng-class="{ 'is-invalid' :!userForm.cantidad.$valid && !userForm.cantidad.$pristine}" name="cantidad"
+              ng-required="true" />
+            <div class="invalid-feedback" ng-show="userForm.cantidad.$invalid">
+              El campo de cantidad no puede estar vacio.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+
+          <producto-selection class="modal fade" id="cadd-location-modal" obj="producto_obj"
+            on-producto-set="productoRefresh(this,false)">
+          </producto-selection>
+
+          <label for="producto_obj" class="col-sm-2 col-form-label">Producto:</label>
+
+          <div class="col-sm-10">
+            <div class="control">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" data-toggle="modal" data-target="#cadd-location-modal">
+                    <span class="fas fa-search"></span>
+                  </span>
+                </div>
+
+                <input 
+                ng-model="producto_obj.id" 
+                ng-change="productoRefresh(this,true)" 
+                type="number"
+                 class="form-control"
+                 id="producto_obj" 
+                  name="producto_obj"      
+                  aria-describedby="basic-addon2"
+                  placeholder="Seleccione un producto"
+                  ng-class="{'is-invalid': !userForm.producto_obj.$valid  && !userForm.producto_obj.$pristine }"
+                  min="1"
+                  ng-required="true"
+                  ng-value="{{id_producto}}" 
+                  ng-model-options="{ allowInvalid: true, debounce: 1000, updateOn: 'default'}">
+                 
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <a class="text-dark">
+                      <span class="p-2 bd-highlight"><i class="fas fa-users fa-1x"></i></span>
+                      Producto: {{producto_obj.codigo}}
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div class="invalid-feedback" ng-show="!userForm.producto_obj.$valid">
+                Id de producto inválido.
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="form-group row">
+
+          <factura-selection class="modal fade" id="cadd-location-modal2" obj="factura_obj"
+            on-factura-set="facturaRefresh(this,false)">
+          </factura-selection>
+
+          <label for="factura_obj" class="col-sm-2 col-form-label">Factura:</label>
+          <div class="col-sm-10">
+            <div class="control">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" data-toggle="modal" data-target="#cadd-location-modal2">
+                    <span class="fas fa-search"></span>
+                  </span>
+                </div>
+
+                <input ng-model="factura_obj.id" 
+                aria-describedby="basic-addon2" 
+                class="form-control" 
+                id="factura_obj"
+                name="factura_obj" 
+                placeholder="Seleccione una factura" 
+                type="number"
+                ng-change="facturaRefresh(this,true)"
+                ng-class="{'is-invalid': !userForm.factura_obj.$valid  && !userForm.factura_obj.$pristine }" 
+                min="1"
+                ng-required="true"  
+                ng-value="{{id_factura}}" 
+                ng-model-options="{debounce: 1000}">
+
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <a class="text-dark">
+                      <span class="p-2 bd-highlight"><i class="fas fa-boxes fa-1x"></i></span>
+                      Factura: {{factura_obj.fecha | stringToDate | date : "dd/MM/yyyy"}} ({{factura_obj.id}})
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <div class="invalid-feedback" ng-show="userForm.factura_obj.$invalid">
+                Id de factura inválido.
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col text-center">
+            <button type="button" class="btn btn-outline-dark" ng-disabled="!userForm.$valid" ng-click="new()">Crear
+              producto</button>
+          </div>
+        </div>
+      </form>
+      <br>
+      <br>
+      <div ng-show="!fallo&&hecho">
+        <div class="alert alert-success text-center" role="alert">
+          <h2>Se ha añadido un nuevo producto.</h2>
+          <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+          <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+        </div>
+      </div>
+      <div ng-show="fallo&&hecho">
+        <div class="alert alert-danger text-center" role="alert">
+          <h2>Ha ocurrido un error al añadir el producto.</h2>
+          <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+          <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+          <button class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

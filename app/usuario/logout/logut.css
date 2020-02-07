@@ -1,0 +1,16 @@
+.logout-center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.logout-container {
+    background-color: rgb(255, 255, 255);
+    width: 350px;
+    border-top: solid .5rem purple;
+    box-sizing: border-box;
+    padding: 3rem 0;
+    box-shadow: 0 0 .5rem pink;
+}

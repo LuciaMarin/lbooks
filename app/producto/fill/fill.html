@@ -1,0 +1,24 @@
+<ng-include src="'app/menu.html'"></ng-include>
+<div class="header shadow">
+    <h1><span class="font-weight-bold context-menu">&#9000; Creación de productos</span></h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card-body" ng-show="!hecho">
+                <button type="button" class="btn btn-outline-dark" ng-click="crear(10)">10 productos</button>
+                <button type="button" class="btn btn-outline-dark" ng-click="crear(50)">50 productos</button>
+                <button type="button" class="btn btn-outline-dark" ng-click="crear(100)">100 productos</button>
+            </div>
+            <div class="card-body" ng-show="hecho">
+                <h2>{{mensaje}}</h2>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="float-right">
+                    <button class="btn btn-outline-dark" ng-click="cerrar()">Cerrar</button>
+                    <button type="button" class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
